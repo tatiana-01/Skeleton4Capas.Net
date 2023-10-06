@@ -7,12 +7,11 @@ using Dominio.Interfaces;
 using Persistencia;
 
 namespace Aplicacion.UnitOfWork;
-
 public class UnitOfWork : IUnitOfWork, IDisposable
 {
     private readonly Skeleton4CapasContext _context;
-    private IRol _roles;
-    private IUsuario _usuarios;
+    private RolRepository _roles;
+    private UsuarioRepository _usuarios;
     public UnitOfWork(Skeleton4CapasContext context)
     {
         _context = context;
