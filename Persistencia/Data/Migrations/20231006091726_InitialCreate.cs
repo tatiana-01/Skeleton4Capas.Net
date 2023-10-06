@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Persistencia.Data.Migrations
 {
     /// <inheritdoc />
@@ -79,8 +81,7 @@ namespace Persistencia.Data.Migrations
                 columns: table => new
                 {
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    RolId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    RolId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,6 +100,27 @@ namespace Persistencia.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Rol",
+                columns: new[] { "Id", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Administrador" },
+                    { 2, "Gerente" },
+                    { 3, "Empleado" },
+                    { 4, "Persona" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Usuario",
+                columns: new[] { "Id", "Email", "Password", "Username" },
+                values: new object[] { 1, "admin@gmail.com", "AQAAAAIAAYagAAAAEKpwgQ9qTS+auF3bic+o6ehOKpSXftZL4Sqpk+Hr2y4Q8HAX6dxadn/O/ERVxNDMbA==", "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "UsuarioRol",
+                columns: new[] { "RolId", "UsuarioId" },
+                values: new object[] { 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshTokens_UsuarioId",

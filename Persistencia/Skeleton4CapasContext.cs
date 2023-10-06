@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Dominio.Entities;
 using Microsoft.EntityFrameworkCore;
+using Persistencia.Seeding;
 
 namespace Persistencia;
 
@@ -23,5 +24,6 @@ public class Skeleton4CapasContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        SeedingInicial.Seed(modelBuilder);
     }
 }

@@ -61,6 +61,28 @@ namespace Persistencia.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rol", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "Administrador"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nombre = "Empleado"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Nombre = "Persona"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "Gerente"
+                        });
                 });
 
             modelBuilder.Entity("Dominio.Entities.Usuario", b =>
@@ -86,6 +108,15 @@ namespace Persistencia.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuario", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "admin@gmail.com",
+                            Password = "AQAAAAIAAYagAAAAEKpwgQ9qTS+auF3bic+o6ehOKpSXftZL4Sqpk+Hr2y4Q8HAX6dxadn/O/ERVxNDMbA==",
+                            Username = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Dominio.Entities.UsuarioRol", b =>
@@ -96,14 +127,18 @@ namespace Persistencia.Data.Migrations
                     b.Property<int>("RolId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.HasKey("UsuarioId", "RolId");
 
                     b.HasIndex("RolId");
 
                     b.ToTable("UsuarioRol", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UsuarioId = 1,
+                            RolId = 1
+                        });
                 });
 
             modelBuilder.Entity("Dominio.Entities.RefreshToken", b =>

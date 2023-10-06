@@ -12,6 +12,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private readonly Skeleton4CapasContext _context;
     private RolRepository _roles;
     private UsuarioRepository _usuarios;
+    private UsuarioRolRepository _usuarioRoles;
     public UnitOfWork(Skeleton4CapasContext context)
     {
         _context = context;
@@ -37,6 +38,17 @@ public class UnitOfWork : IUnitOfWork, IDisposable
                 _usuarios = new UsuarioRepository(_context);
             }
             return _usuarios;
+        }
+    }
+    public IUsuarioRol UsuarioRoles
+    {
+        get
+        {
+            if (_usuarioRoles == null)
+            {
+                _usuarioRoles = new UsuarioRolRepository(_context);
+            }
+            return _usuarioRoles;
         }
     }
     public async Task<int> SaveAsync()
